@@ -23,13 +23,15 @@ do
   SCRIPT_PATH="$BASE_DIR/$PERIOD.sh"
   INTERVAL=`interval_for_period $PERIOD`
   ROOT_DIR="$BASE_DIR/$PERIOD"
+  ZSH_LOCATION=`which zsh`
 
   if [ ! -d $ROOT_DIR ]; then
     mkdir -p $ROOT_DIR || exit $?
   fi
 
   cat $D_R/period.sh | \
-    sed -e "s|ROOT_DIR|$ROOT_DIR|g" \
+    sed -e "s|ROOT_DIR|$ROOT_DIR|g" | \
+    sed -e "s|ZSH_LOCATION|$ZSH_LOCATION|g" \
     > $BASE_DIR/$PERIOD.sh || exit $?
 
   cat $D_R/period.plist | \
@@ -38,5 +40,6 @@ do
     sed -e "s|INTERVAL|$INTERVAL|g" \
     > $HOME/Library/LaunchAgents/com.example.osx.crond.$PERIOD.plist || exit $?
 
+  launchctl unload -w $HOME/Library/LaunchAgents/com.example.osx.crond.$PERIOD.plist
   launchctl load -w $HOME/Library/LaunchAgents/com.example.osx.crond.$PERIOD.plist
 done
