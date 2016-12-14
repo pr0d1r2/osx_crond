@@ -2,5 +2,5 @@
 
 for SCRIPT in `find ROOT_DIR -type f -name "*.sh"`
 do
-  ZSH_LOCATION $SCRIPT
+  ZSH_LOCATION $SCRIPT > $SCRIPT.log
 done
