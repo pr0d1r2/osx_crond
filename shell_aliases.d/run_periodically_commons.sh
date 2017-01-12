@@ -1,5 +1,6 @@
 function run_periodically_commons() {
   echo "#!`which zsh`"
+  echo "PATH=\"$PATH\""
   if [ -d $HOME/.rbenv/bin ]; then
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"'
     echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi'
