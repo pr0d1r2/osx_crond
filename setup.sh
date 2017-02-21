@@ -30,14 +30,14 @@ do
   fi
 
   cat $D_R/period.sh | \
-    sed -e "s|ROOT_DIR|$ROOT_DIR|g" | \
-    sed -e "s|ZSH_LOCATION|$ZSH_LOCATION|g" \
+    sed -e "s|ROOT_DIR|$ROOT_DIR|g" \
+        -e "s|ZSH_LOCATION|$ZSH_LOCATION|g" \
     > $BASE_DIR/$PERIOD.sh || exit $?
 
   cat $D_R/period.plist | \
-    sed -e "s|PERIOD_NAME|$PERIOD|g" | \
-    sed -e "s|SCRIPT_PATH|$SCRIPT_PATH|g" | \
-    sed -e "s|INTERVAL|$INTERVAL|g" \
+    sed -e "s|PERIOD_NAME|$PERIOD|g" \
+        -e "s|SCRIPT_PATH|$SCRIPT_PATH|g" \
+        -e "s|INTERVAL|$INTERVAL|g" \
     > $HOME/Library/LaunchAgents/com.example.osx.crond.$PERIOD.plist || exit $?
 
   launchctl unload -w $HOME/Library/LaunchAgents/com.example.osx.crond.$PERIOD.plist
