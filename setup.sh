@@ -34,6 +34,8 @@ do
         -e "s|ZSH_LOCATION|$ZSH_LOCATION|g" \
     > $BASE_DIR/$PERIOD.sh || exit $?
 
+  chmod +x "$BASE_DIR/$PERIOD.sh"
+
   cat $D_R/period.plist | \
     sed -e "s|PERIOD_NAME|$PERIOD|g" \
         -e "s|SCRIPT_PATH|$SCRIPT_PATH|g" \
