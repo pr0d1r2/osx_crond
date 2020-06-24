@@ -18,6 +18,8 @@ function interval_for_period() {
   esac
 }
 
+test -d "$HOME/Library/LaunchAgents" || mkdir -p "$HOME/Library/LaunchAgents" || exit $?
+
 for PERIOD in minutely hourly daily
 do
   SCRIPT_PATH="$BASE_DIR/$PERIOD.sh"
