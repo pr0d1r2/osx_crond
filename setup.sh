@@ -47,3 +47,15 @@ do
   launchctl unload -w $HOME/Library/LaunchAgents/com.example.osx.crond.$PERIOD.plist
   launchctl load -w $HOME/Library/LaunchAgents/com.example.osx.crond.$PERIOD.plist
 done
+
+for AT_TYPE in at at_weekdays
+do
+  ROOT_DIR="$BASE_DIR/$AT_TYPE"
+  test -d "$ROOT_DIR" || mkdir -p "$ROOT_DIR"
+  cat "$D_R/$AT_TYPE.sh" | \
+    sed -e "s|ROOT_DIR|$ROOT_DIR|g" \
+        -e "s|ZSH_LOCATION|$ZSH_LOCATION|g" \
+    > "$BASE_DIR/minutely/${AT_TYPE}_poll.sh" || exit $?
+
+  chmod +x "$BASE_DIR/minutely/${AT_TYPE}_poll.sh"
+done
