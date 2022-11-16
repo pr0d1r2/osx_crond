@@ -59,3 +59,6 @@ do
 
   chmod +x "$BASE_DIR/minutely/${AT_TYPE}_poll.sh"
 done
+
+# NOTE: fix existing directories with hour below 10
+find ~/.cron.d -type d -name "[0-9]:*" | parallel "echo mv {} {//}/0{/}"
