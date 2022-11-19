@@ -2,7 +2,7 @@
 
 WEEKDAY="$(date +%w)"
 
-if [ "$WEEKDAY" -lt 6 ]; then
+if [ "$WEEKDAY" -le 6 ]; then
   HOURS_AND_MINUTES="$(date "+%H:%M")"
 
   if [ -d "ROOT_DIR/$HOURS_AND_MINUTES" ]; then
